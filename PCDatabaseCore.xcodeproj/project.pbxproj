@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500A14F719B9A3A20059DE22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500A14F619B9A3A20059DE22 /* CoreData.framework */; };
+		500A14FA19B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A14F919B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m */; };
+		500A14FD19B9AAB50059DE22 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FB19B9AAB50059DE22 /* TestDataModel.xcdatamodeld */; };
+		500A150019B9AAFF0059DE22 /* TestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FF19B9AAFF0059DE22 /* TestEntity.m */; };
+		500A150319B9AC4B0059DE22 /* NSArray+Permutations.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A150219B9AC4B0059DE22 /* NSArray+Permutations.m */; };
+		500A150619B9ACD10059DE22 /* DatabaseTestHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A150519B9ACD10059DE22 /* DatabaseTestHelperMethods.m */; };
 		5045A59519B61FAB00ED99BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5045A59419B61FAB00ED99BB /* Foundation.framework */; };
 		5045A59A19B61FAB00ED99BB /* PCDatabaseCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5045A59919B61FAB00ED99BB /* PCDatabaseCore.h */; };
 		5045A59C19B61FAB00ED99BB /* PCDatabaseCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A59B19B61FAB00ED99BB /* PCDatabaseCore.m */; };
@@ -16,6 +22,16 @@
 		5045A5A919B61FAB00ED99BB /* libPCDatabaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5045A59119B61FAB00ED99BB /* libPCDatabaseCore.a */; };
 		5045A5AF19B61FAB00ED99BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5045A5AD19B61FAB00ED99BB /* InfoPlist.strings */; };
 		5045A5B119B61FAB00ED99BB /* PCDatabaseCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5B019B61FAB00ED99BB /* PCDatabaseCoreTests.m */; };
+		5045A5D019B6ED1200ED99BB /* PCDatabaseCore+CountEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5BE19B6ED1200ED99BB /* PCDatabaseCore+CountEntities.m */; };
+		5045A5D119B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5C019B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.m */; };
+		5045A5D219B6ED1200ED99BB /* PCDatabaseCore+Fetching.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5C219B6ED1200ED99BB /* PCDatabaseCore+Fetching.m */; };
+		5045A5D319B6ED1200ED99BB /* PCDatabaseCore+GetEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5C419B6ED1200ED99BB /* PCDatabaseCore+GetEntity.m */; };
+		5045A5D419B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5C619B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.m */; };
+		5045A5E219B6EED700ED99BB /* NSError+DatabaseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5DB19B6EED700ED99BB /* NSError+DatabaseError.m */; };
+		5045A5E319B6EED700ED99BB /* NSManagedObject+ImportFromJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5DD19B6EED700ED99BB /* NSManagedObject+ImportFromJSON.m */; };
+		5045A5E419B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5DF19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
+		5045A5E519B6EED700ED99BB /* UIApplication+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A5E119B6EED700ED99BB /* UIApplication+Directories.m */; };
+		62A7691D2A8242649DBA5764 /* libPods-PCDatabaseCoreTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AC2A23FAD4E9C98F74919 /* libPods-PCDatabaseCoreTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +58,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PCDatabaseCoreTests.xcconfig"; path = "Pods/Pods-PCDatabaseCoreTests.xcconfig"; sourceTree = "<group>"; };
+		500A14F619B9A3A20059DE22 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		500A14F819B9A3EC0059DE22 /* NSManagedObject+SafeSetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+SafeSetters.h"; sourceTree = "<group>"; };
+		500A14F919B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+SafeSetters.m"; sourceTree = "<group>"; };
+		500A14FC19B9AAB50059DE22 /* TestDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestDataModel.xcdatamodel; sourceTree = "<group>"; };
+		500A14FE19B9AAFF0059DE22 /* TestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestEntity.h; sourceTree = "<group>"; };
+		500A14FF19B9AAFF0059DE22 /* TestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestEntity.m; sourceTree = "<group>"; };
+		500A150119B9AC4B0059DE22 /* NSArray+Permutations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Permutations.h"; sourceTree = "<group>"; };
+		500A150219B9AC4B0059DE22 /* NSArray+Permutations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Permutations.m"; sourceTree = "<group>"; };
+		500A150419B9ACD10059DE22 /* DatabaseTestHelperMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseTestHelperMethods.h; sourceTree = "<group>"; };
+		500A150519B9ACD10059DE22 /* DatabaseTestHelperMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseTestHelperMethods.m; sourceTree = "<group>"; };
 		5045A59119B61FAB00ED99BB /* libPCDatabaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPCDatabaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5045A59419B61FAB00ED99BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5045A59819B61FAB00ED99BB /* PCDatabaseCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore-Prefix.pch"; sourceTree = "<group>"; };
@@ -53,6 +80,26 @@
 		5045A5AC19B61FAB00ED99BB /* PCDatabaseCoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PCDatabaseCoreTests-Info.plist"; sourceTree = "<group>"; };
 		5045A5AE19B61FAB00ED99BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5045A5B019B61FAB00ED99BB /* PCDatabaseCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PCDatabaseCoreTests.m; sourceTree = "<group>"; };
+		5045A5BA19B6ED1200ED99BB /* PCDatabaseCore_Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDatabaseCore_Categories.h; sourceTree = "<group>"; };
+		5045A5BD19B6ED1200ED99BB /* PCDatabaseCore+CountEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore+CountEntities.h"; sourceTree = "<group>"; };
+		5045A5BE19B6ED1200ED99BB /* PCDatabaseCore+CountEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDatabaseCore+CountEntities.m"; sourceTree = "<group>"; };
+		5045A5BF19B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore+CreateEntity.h"; sourceTree = "<group>"; };
+		5045A5C019B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDatabaseCore+CreateEntity.m"; sourceTree = "<group>"; };
+		5045A5C119B6ED1200ED99BB /* PCDatabaseCore+Fetching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore+Fetching.h"; sourceTree = "<group>"; };
+		5045A5C219B6ED1200ED99BB /* PCDatabaseCore+Fetching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDatabaseCore+Fetching.m"; sourceTree = "<group>"; };
+		5045A5C319B6ED1200ED99BB /* PCDatabaseCore+GetEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore+GetEntity.h"; sourceTree = "<group>"; };
+		5045A5C419B6ED1200ED99BB /* PCDatabaseCore+GetEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDatabaseCore+GetEntity.m"; sourceTree = "<group>"; };
+		5045A5C519B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PCDatabaseCore+RemoveEntity.h"; sourceTree = "<group>"; };
+		5045A5C619B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PCDatabaseCore+RemoveEntity.m"; sourceTree = "<group>"; };
+		5045A5DA19B6EED700ED99BB /* NSError+DatabaseError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+DatabaseError.h"; sourceTree = "<group>"; };
+		5045A5DB19B6EED700ED99BB /* NSError+DatabaseError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+DatabaseError.m"; sourceTree = "<group>"; };
+		5045A5DC19B6EED700ED99BB /* NSManagedObject+ImportFromJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ImportFromJSON.h"; sourceTree = "<group>"; };
+		5045A5DD19B6EED700ED99BB /* NSManagedObject+ImportFromJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ImportFromJSON.m"; sourceTree = "<group>"; };
+		5045A5DE19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+KCOrderedAccessorFix.h"; sourceTree = "<group>"; };
+		5045A5DF19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
+		5045A5E019B6EED700ED99BB /* UIApplication+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Directories.h"; sourceTree = "<group>"; };
+		5045A5E119B6EED700ED99BB /* UIApplication+Directories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Directories.m"; sourceTree = "<group>"; };
+		C88AC2A23FAD4E9C98F74919 /* libPods-PCDatabaseCoreTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PCDatabaseCoreTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A14F719B9A3A20059DE22 /* CoreData.framework in Frameworks */,
 				5045A59519B61FAB00ED99BB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,12 +120,58 @@
 				5045A5A619B61FAB00ED99BB /* UIKit.framework in Frameworks */,
 				5045A5A919B61FAB00ED99BB /* libPCDatabaseCore.a in Frameworks */,
 				5045A5A419B61FAB00ED99BB /* Foundation.framework in Frameworks */,
+				62A7691D2A8242649DBA5764 /* libPods-PCDatabaseCoreTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500A150719B9ACD80059DE22 /* GetEntity */ = {
+			isa = PBXGroup;
+			children = (
+				5045A5C319B6ED1200ED99BB /* PCDatabaseCore+GetEntity.h */,
+				5045A5C419B6ED1200ED99BB /* PCDatabaseCore+GetEntity.m */,
+			);
+			name = GetEntity;
+			sourceTree = "<group>";
+		};
+		500A150819B9ACE00059DE22 /* Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				5045A5C119B6ED1200ED99BB /* PCDatabaseCore+Fetching.h */,
+				5045A5C219B6ED1200ED99BB /* PCDatabaseCore+Fetching.m */,
+			);
+			name = Fetching;
+			sourceTree = "<group>";
+		};
+		500A150919B9ACE80059DE22 /* RemoveEntity */ = {
+			isa = PBXGroup;
+			children = (
+				5045A5C519B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.h */,
+				5045A5C619B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.m */,
+			);
+			name = RemoveEntity;
+			sourceTree = "<group>";
+		};
+		500A150A19B9ACF40059DE22 /* CreateEntity */ = {
+			isa = PBXGroup;
+			children = (
+				5045A5BF19B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.h */,
+				5045A5C019B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.m */,
+			);
+			name = CreateEntity;
+			sourceTree = "<group>";
+		};
+		500A150B19B9ACFD0059DE22 /* CountEntities */ = {
+			isa = PBXGroup;
+			children = (
+				5045A5BD19B6ED1200ED99BB /* PCDatabaseCore+CountEntities.h */,
+				5045A5BE19B6ED1200ED99BB /* PCDatabaseCore+CountEntities.m */,
+			);
+			name = CountEntities;
+			sourceTree = "<group>";
+		};
 		5045A58819B61FAB00ED99BB = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +179,7 @@
 				5045A5AA19B61FAB00ED99BB /* PCDatabaseCoreTests */,
 				5045A59319B61FAB00ED99BB /* Frameworks */,
 				5045A59219B61FAB00ED99BB /* Products */,
+				33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,9 +195,11 @@
 		5045A59319B61FAB00ED99BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				500A14F619B9A3A20059DE22 /* CoreData.framework */,
 				5045A59419B61FAB00ED99BB /* Foundation.framework */,
 				5045A5A219B61FAB00ED99BB /* XCTest.framework */,
 				5045A5A519B61FAB00ED99BB /* UIKit.framework */,
+				C88AC2A23FAD4E9C98F74919 /* libPods-PCDatabaseCoreTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,8 +207,15 @@
 		5045A59619B61FAB00ED99BB /* PCDatabaseCore */ = {
 			isa = PBXGroup;
 			children = (
+				5045A5D919B6EED700ED99BB /* Categories */,
 				5045A59919B61FAB00ED99BB /* PCDatabaseCore.h */,
 				5045A59B19B61FAB00ED99BB /* PCDatabaseCore.m */,
+				5045A5BA19B6ED1200ED99BB /* PCDatabaseCore_Categories.h */,
+				500A150B19B9ACFD0059DE22 /* CountEntities */,
+				500A150A19B9ACF40059DE22 /* CreateEntity */,
+				500A150819B9ACE00059DE22 /* Fetching */,
+				500A150719B9ACD80059DE22 /* GetEntity */,
+				500A150919B9ACE80059DE22 /* RemoveEntity */,
 				5045A59719B61FAB00ED99BB /* Supporting Files */,
 			);
 			path = PCDatabaseCore;
@@ -128,8 +232,15 @@
 		5045A5AA19B61FAB00ED99BB /* PCDatabaseCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				500A150419B9ACD10059DE22 /* DatabaseTestHelperMethods.h */,
+				500A150519B9ACD10059DE22 /* DatabaseTestHelperMethods.m */,
+				500A150119B9AC4B0059DE22 /* NSArray+Permutations.h */,
+				500A150219B9AC4B0059DE22 /* NSArray+Permutations.m */,
 				5045A5B019B61FAB00ED99BB /* PCDatabaseCoreTests.m */,
 				5045A5AB19B61FAB00ED99BB /* Supporting Files */,
+				500A14FB19B9AAB50059DE22 /* TestDataModel.xcdatamodeld */,
+				500A14FE19B9AAFF0059DE22 /* TestEntity.h */,
+				500A14FF19B9AAFF0059DE22 /* TestEntity.m */,
 			);
 			path = PCDatabaseCoreTests;
 			sourceTree = "<group>";
@@ -141,6 +252,23 @@
 				5045A5AD19B61FAB00ED99BB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5045A5D919B6EED700ED99BB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				500A14F819B9A3EC0059DE22 /* NSManagedObject+SafeSetters.h */,
+				500A14F919B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m */,
+				5045A5DA19B6EED700ED99BB /* NSError+DatabaseError.h */,
+				5045A5DB19B6EED700ED99BB /* NSError+DatabaseError.m */,
+				5045A5DC19B6EED700ED99BB /* NSManagedObject+ImportFromJSON.h */,
+				5045A5DD19B6EED700ED99BB /* NSManagedObject+ImportFromJSON.m */,
+				5045A5DE19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.h */,
+				5045A5DF19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m */,
+				5045A5E019B6EED700ED99BB /* UIApplication+Directories.h */,
+				5045A5E119B6EED700ED99BB /* UIApplication+Directories.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,9 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5045A5B719B61FAB00ED99BB /* Build configuration list for PBXNativeTarget "PCDatabaseCoreTests" */;
 			buildPhases = (
+				E67113FFC6BB484E8BD5E8CB /* Check Pods Manifest.lock */,
 				5045A59D19B61FAB00ED99BB /* Sources */,
 				5045A59E19B61FAB00ED99BB /* Frameworks */,
 				5045A59F19B61FAB00ED99BB /* Resources */,
+				E4AA4EC4228C44E9B269E6AD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,12 +349,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E4AA4EC4228C44E9B269E6AD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-PCDatabaseCoreTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E67113FFC6BB484E8BD5E8CB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5045A58D19B61FAB00ED99BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5045A5E519B6EED700ED99BB /* UIApplication+Directories.m in Sources */,
+				5045A5E319B6EED700ED99BB /* NSManagedObject+ImportFromJSON.m in Sources */,
 				5045A59C19B61FAB00ED99BB /* PCDatabaseCore.m in Sources */,
+				5045A5E219B6EED700ED99BB /* NSError+DatabaseError.m in Sources */,
+				5045A5D019B6ED1200ED99BB /* PCDatabaseCore+CountEntities.m in Sources */,
+				5045A5D419B6ED1200ED99BB /* PCDatabaseCore+RemoveEntity.m in Sources */,
+				5045A5D219B6ED1200ED99BB /* PCDatabaseCore+Fetching.m in Sources */,
+				5045A5E419B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
+				5045A5D319B6ED1200ED99BB /* PCDatabaseCore+GetEntity.m in Sources */,
+				500A14FA19B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m in Sources */,
+				5045A5D119B6ED1200ED99BB /* PCDatabaseCore+CreateEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +405,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A150019B9AAFF0059DE22 /* TestEntity.m in Sources */,
 				5045A5B119B61FAB00ED99BB /* PCDatabaseCoreTests.m in Sources */,
+				500A150619B9ACD10059DE22 /* DatabaseTestHelperMethods.m in Sources */,
+				500A14FD19B9AAB50059DE22 /* TestDataModel.xcdatamodeld in Sources */,
+				500A150319B9AC4B0059DE22 /* NSArray+Permutations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +529,7 @@
 		};
 		5045A5B819B61FAB00ED99BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -372,6 +550,7 @@
 		};
 		5045A5B919B61FAB00ED99BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -405,6 +584,7 @@
 				5045A5B619B61FAB00ED99BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5045A5B719B61FAB00ED99BB /* Build configuration list for PBXNativeTarget "PCDatabaseCoreTests" */ = {
 			isa = XCConfigurationList;
@@ -413,8 +593,22 @@
 				5045A5B919B61FAB00ED99BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		500A14FB19B9AAB50059DE22 /* TestDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				500A14FC19B9AAB50059DE22 /* TestDataModel.xcdatamodel */,
+			);
+			currentVersion = 500A14FC19B9AAB50059DE22 /* TestDataModel.xcdatamodel */;
+			path = TestDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5045A58919B61FAB00ED99BB /* Project object */;
 }

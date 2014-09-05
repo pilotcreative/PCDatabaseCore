@@ -7,3 +7,9 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
 #endif
+
+#ifdef DEBUG
+#define DLog( s, ... ) NSLog( @"%p %@:%d   (%@) %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,  NSStringFromSelector(_cmd), [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DLog(...)
+#endif
