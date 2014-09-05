@@ -178,7 +178,7 @@
 }
 
 - (void)createEnitites:(NSString *)entityName
-      withSortedValues:(NSArray *)valuesArray
+            withValues:(NSArray *)valuesArray
                 forKey:(id)key
           inBackground:(void (^)(NSArray *))success
                failure:(ErrorHandleBlock)failure

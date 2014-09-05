@@ -61,7 +61,9 @@
 - (NSArray *)createEntities:(NSString *)entityName
                     withKey:(NSString *)key
                   andValues:(NSArray *)values
-                  inContext:(NSManagedObjectContext *)context;
+                  inContext:(NSManagedObjectContext *)context
+                      error:(NSError **)error;
+
 
 - (void)createEnitites:(NSString *)entityName
             withValues:(NSArray *)valuesArray
