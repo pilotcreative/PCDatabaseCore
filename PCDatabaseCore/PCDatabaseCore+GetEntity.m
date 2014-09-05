@@ -25,8 +25,7 @@
     
     if (error)
     {
-        DLog(@"get entity error %@", [error localizedDescription]);
-        return result;
+                return result;
     }
     
     if (foundEntity != nil && [foundEntity count] > 0)

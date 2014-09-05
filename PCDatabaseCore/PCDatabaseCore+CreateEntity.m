@@ -49,8 +49,7 @@
 //        pthread_mutex_unlock(&mutex);
         return objectFromDb;
     }
-    DLog(@"DB create entity error %@ %@", entityName, entityId);
-    return nil;
+        return nil;
 }
 
 - (NSManagedObject *)createEntity:(NSString *)entityName withKey:(NSString *)key andValue:(id)value
@@ -73,8 +72,7 @@
 //        pthread_mutex_unlock(&mutex);
         return objectFromDb;
     }
-    DLog(@"DB create entity error %@", entityName);
-    return nil;
+        return nil;
 }
 
 
@@ -140,6 +138,7 @@
                     withKey:(NSString *)key
                   andValues:(NSArray *)values
                   inContext:(NSManagedObjectContext *)context
+                      error:(NSError **)error
 {
     static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
     
@@ -165,7 +164,7 @@
         [self saveContext:context forIndex:idx];
         [resultingEntities addObject:createdObject];
     }];
-    [context save:nil];
+    [context save:error];
 
     pthread_mutex_unlock(&mutex);
     return [resultingEntities sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
@@ -177,5 +176,38 @@
         [context save:&error];
     return error;
 }
+
+- (void)createEnitites:(NSString *)entityName
+      withSortedValues:(NSArray *)valuesArray
+                forKey:(id)key
+          inBackground:(void (^)(NSArray *))success
+               failure:(ErrorHandleBlock)failure
+{
+    dispatch_queue_t main = dispatch_get_main_queue();
+    [self.backgroundObjectContext performBlock:^{
+        NSError *error = nil;
+        NSArray *entities = [self createEntities:entityName withKey:key andValues:valuesArray inContext:self.backgroundObjectContext error:&error];
+        if (error)
+        {
+            if (failure)
+            {
+                dispatch_async(main, ^{ failure(error); });
+            }
+            return;
+        }
+        else
+        {
+            if (success)
+            {
+                dispatch_async(main, ^{
+                    NSArray *results = [self objectsFromBackgroundThread:entities];
+                    success(results);
+                });
+            }
+        }
+    }];
+}
+
+
 
 @end

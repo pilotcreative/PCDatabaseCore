@@ -174,8 +174,7 @@ NSString *kEntityName = @"TestEntity";
 //        dispatch_apply(allThreads, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(size_t idx) {
 //            
 //            [context performBlock:^{
-//                DLog(@"create block %ld %@", idx, [NSThread currentThread]);
-//                [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context];
+//                //                [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context];
 //                if (counter == allThreads - 1)
 //                    [self XCA_notify:XCTAsyncTestCaseStatusSucceeded];
 //                else

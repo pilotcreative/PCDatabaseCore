@@ -30,8 +30,7 @@
         error = [self saveDatabase];
         if (error)
         {
-            DLog(@"DB: remove error %@", [error localizedDescription]);
-            return error;
+                        return error;
         }
         else
             return nil;
@@ -58,8 +57,7 @@
     }
     if (error)
     {
-        DLog(@"DB: remove error %@", [error localizedDescription]);
-        return [NSError removeError];
+                return [NSError removeError];
     }
     else
         return nil;
@@ -79,8 +77,7 @@
         
         if (error)
         {
-            DLog(@"error removing %@", [error localizedDescription]);
-            if(failure)
+                        if(failure)
                 dispatch_async(main, ^{ failure([NSError fetchRequestError]); });
             return;
         }
@@ -98,8 +95,7 @@
             
             if (error)
             {
-                DLog(@"error removing %@", [error localizedDescription]);
-                if(failure)
+                                if(failure)
                     dispatch_async(main, ^{ failure([NSError saveError]); });
                 return;
             }
@@ -131,8 +127,7 @@
             
             if (error)
             {
-                DLog(@"error saving %@", [error localizedDescription]);
-                if(failure)
+                                if(failure)
                 {
                     dispatch_async(main, ^{ failure([NSError saveError]); });
                 }

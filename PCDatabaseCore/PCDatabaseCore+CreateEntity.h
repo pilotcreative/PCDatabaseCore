@@ -63,4 +63,12 @@
                   andValues:(NSArray *)values
                   inContext:(NSManagedObjectContext *)context;
 
+- (void)createEnitites:(NSString *)entityName
+            withValues:(NSArray *)valuesArray
+                forKey:(id)key
+          inBackground:(void (^)(NSArray *))success
+               failure:(ErrorHandleBlock)failure;
+
+
+
 @end

@@ -182,8 +182,7 @@ static NSString *kDatabaseType = @"sqlite";
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error])
     {
-        DLog(@"DB: persistentStoreCoordinator error %@, %@", error, [error userInfo]);
-        return nil;
+                return nil;
     }
     
     return persistentStoreCoordinator;
@@ -204,8 +203,7 @@ static NSString *kDatabaseType = @"sqlite";
         [self performSelectorOnMainThread:@selector(contextChanged:) withObject:notification waitUntilDone:YES];
         return;
     }
-    DLog(@"changes merged");
-    [[self mainObjectContext] mergeChangesFromContextDidSaveNotification:notification];
+        [[self mainObjectContext] mergeChangesFromContextDidSaveNotification:notification];
     bgTask = UIBackgroundTaskInvalid;
     [self fixNSFetchedResultControllerForNotification:notification];
 }
@@ -231,8 +229,7 @@ static NSString *kDatabaseType = @"sqlite";
             [obj willAccessValueForKey:nil];
         }
         @catch (NSException *exception) {
-            DLog(@"context merge exception: %@",exception);
-        }
+                    }
     }
 }
 
@@ -267,15 +264,12 @@ static NSString *kDatabaseType = @"sqlite";
 {
     __block NSError *error = nil;
     [mainObjectContext performBlockAndWait:^{
-        if (![mainObjectContext save:&error])
-            DLog(@"error %@", error);
-        else
+        if ([mainObjectContext save:&error])
         {
             [self.writerObjectContext performBlockAndWait:^{
                 if (![self.writerObjectContext save:&error])
                 {
-                    DLog(@"error %@", error);
-                }
+                                    }
             }];
         }
     }];
