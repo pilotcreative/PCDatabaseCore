@@ -36,11 +36,27 @@ static NSString *kDatabaseType = @"sqlite";
     static id dbSharedInstance;
     dispatch_once(&onceToken, ^{
         dbSharedInstance = [[[self class] alloc] init];
-        [dbSharedInstance mainObjectContext];
         [dbSharedInstance setDatabaseName:kDatabaseName];
+        [dbSharedInstance mainObjectContext];
     });
     return dbSharedInstance;
 }
+
++ (instancetype)initWithName:(NSString *)databaseName
+{
+#ifdef TEST
+    return [self sharedInstanceTest];
+#endif
+    static dispatch_once_t onceToken;
+    static id dbSharedInstance;
+    dispatch_once(&onceToken, ^{
+        dbSharedInstance = [[[self class] alloc] init];
+        [dbSharedInstance setDatabaseName:databaseName];
+        [dbSharedInstance mainObjectContext];
+    });
+    return dbSharedInstance;
+}
+
 
 + (instancetype)sharedInstanceTest
 {
@@ -267,9 +283,7 @@ static NSString *kDatabaseType = @"sqlite";
         if ([mainObjectContext save:&error])
         {
             [self.writerObjectContext performBlockAndWait:^{
-                if (![self.writerObjectContext save:&error])
-                {
-                                    }
+                [self.writerObjectContext save:&error];
             }];
         }
     }];

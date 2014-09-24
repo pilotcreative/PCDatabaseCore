@@ -1,0 +1,17 @@
+PODS:
+  - PCDatabaseCore (0.0.1):
+    - XCAsyncTestCase
+  - XCAsyncTestCase (1.0.0)
+
+DEPENDENCIES:
+  - PCDatabaseCore (from `git@github.com:pilotcreative/PCDatabaseCore.git`)
+
+EXTERNAL SOURCES:
+  PCDatabaseCore:
+    :git: git@github.com:pilotcreative/PCDatabaseCore.git
+
+SPEC CHECKSUMS:
+  PCDatabaseCore: ba26f16dff5e165c849fd668c5689443cad03985
+  XCAsyncTestCase: 4b6a2a136d3cff7fe0b6135eb82e98446445c0e2
+
+COCOAPODS: 0.33.1

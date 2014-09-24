@@ -14,16 +14,29 @@
     return [self getCountOfEntities:entityName matchingPredicate:nil];
 }
 
+- (NSInteger)getCountOfEntities:(NSString *)entityName inContext:(NSManagedObjectContext *)context
+{
+    return [self getCountOfEntities:entityName matchingPredicate:nil inContext:context];
+}
+
+
 - (NSInteger)getCountOfEntities:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.mainObjectContext];
+    return [self getCountOfEntities:entityName matchingPredicate:predicate inContext:self.mainObjectContext];
+}
+
+
+- (NSInteger)getCountOfEntities:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = entity;
     if (predicate != nil)
         request.predicate = predicate;
     NSError *error = nil;
-    return [self.mainObjectContext countForFetchRequest:request error:&error];
+    return [context countForFetchRequest:request error:&error];
 }
+
 
 @end

@@ -22,6 +22,7 @@
         inBackground:(void (^)())success
                failure:(ErrorHandleBlock)failure;
 - (NSError *)removeAllEntities:(NSString *)entityName;
+- (NSError *)removeAllEntities:(NSString *)entityName inContext:(NSManagedObjectContext *)context;
 - (void)removeAllEntities:(NSString *)entityName
              inBackground:(void (^)())success
                   failure:(ErrorHandleBlock)failure;

@@ -140,14 +140,21 @@
 }
 - (NSError *)removeAllEntities:(NSString *)entityName
 {
+    return [self removeAllEntities:entityName inContext:self.mainObjectContext];
+}
+
+- (NSError *)removeAllEntities:(NSString *)entityName inContext:(NSManagedObjectContext *)context
+{
     NSError *error = nil;
-    NSFetchRequest *fetchRequest = [self fetchedManagedObjectsInContext:self.mainObjectContext forEntity:entityName withPredicate:nil];
-    NSArray *entitiesToRemove = [self fetchArrayWithRequest:fetchRequest inContext:self.mainObjectContext error:&error];
+    NSFetchRequest *fetchRequest = [self fetchedManagedObjectsInContext:context forEntity:entityName withPredicate:nil];
+    NSArray *entitiesToRemove = [self fetchArrayWithRequest:fetchRequest inContext:context error:&error];
     if (error != nil)
         return error;
     
-    return [self removeEntities:entitiesToRemove inContext:self.mainObjectContext];
+    return [self removeEntities:entitiesToRemove inContext:context];
 }
+
+
 - (void)removeAllEntities:(NSString *)entityName
              inBackground:(void (^)())success
                   failure:(ErrorHandleBlock)failure

@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		500A14F719B9A3A20059DE22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500A14F619B9A3A20059DE22 /* CoreData.framework */; };
 		500A14FA19B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A14F919B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m */; };
-		500A14FD19B9AAB50059DE22 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FB19B9AAB50059DE22 /* TestDataModel.xcdatamodeld */; };
-		500A150019B9AAFF0059DE22 /* TestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FF19B9AAFF0059DE22 /* TestEntity.m */; };
 		500A150319B9AC4B0059DE22 /* NSArray+Permutations.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A150219B9AC4B0059DE22 /* NSArray+Permutations.m */; };
 		500A150619B9ACD10059DE22 /* DatabaseTestHelperMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A150519B9ACD10059DE22 /* DatabaseTestHelperMethods.m */; };
+		500A158B19BA09490059DE22 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500A14F619B9A3A20059DE22 /* CoreData.framework */; };
+		500A158C19BA0DEE0059DE22 /* TestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FB19B9AAB50059DE22 /* TestDataModel.xcdatamodeld */; };
+		500A158D19BA0DFC0059DE22 /* TestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 500A14FF19B9AAFF0059DE22 /* TestEntity.m */; };
 		5045A59519B61FAB00ED99BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5045A59419B61FAB00ED99BB /* Foundation.framework */; };
 		5045A59A19B61FAB00ED99BB /* PCDatabaseCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5045A59919B61FAB00ED99BB /* PCDatabaseCore.h */; };
 		5045A59C19B61FAB00ED99BB /* PCDatabaseCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045A59B19B61FAB00ED99BB /* PCDatabaseCore.m */; };
@@ -116,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A158B19BA09490059DE22 /* CoreData.framework in Frameworks */,
 				5045A5A319B61FAB00ED99BB /* XCTest.framework in Frameworks */,
 				5045A5A619B61FAB00ED99BB /* UIKit.framework in Frameworks */,
 				5045A5A919B61FAB00ED99BB /* libPCDatabaseCore.a in Frameworks */,
@@ -405,10 +407,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				500A150019B9AAFF0059DE22 /* TestEntity.m in Sources */,
 				5045A5B119B61FAB00ED99BB /* PCDatabaseCoreTests.m in Sources */,
+				500A158D19BA0DFC0059DE22 /* TestEntity.m in Sources */,
+				500A158C19BA0DEE0059DE22 /* TestDataModel.xcdatamodeld in Sources */,
 				500A150619B9ACD10059DE22 /* DatabaseTestHelperMethods.m in Sources */,
-				500A14FD19B9AAB50059DE22 /* TestDataModel.xcdatamodeld in Sources */,
 				500A150319B9AC4B0059DE22 /* NSArray+Permutations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

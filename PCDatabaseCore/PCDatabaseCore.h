@@ -29,6 +29,8 @@ extern const int kSaveBatchSize;
 
 //*********************************************************************************************************
 #pragma mark - Initialization
+
++ (instancetype)initWithName:(NSString *)databaseName;
 + (instancetype)sharedInstance;
 + (instancetype)sharedInstanceTest;
 

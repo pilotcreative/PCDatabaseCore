@@ -11,6 +11,8 @@
 @interface PCDatabaseCore (CountEntities)
 #pragma mark - Count
 - (NSInteger)getCountOfEntities:(NSString *)entityName;
+- (NSInteger)getCountOfEntities:(NSString *)entityName inContext:(NSManagedObjectContext *)context;
 - (NSInteger)getCountOfEntities:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate;
+- (NSInteger)getCountOfEntities:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
 @end

@@ -9,4 +9,9 @@
 #import <Foundation/Foundation.h>
 @interface DatabaseTestHelperMethods : NSObject
 + (NSArray *)prepareDbIdArrayWithStartingIndex:(NSInteger)start endIndex:(NSInteger)endIndex;
++ (void)setUpContextsForTesting;
++ (NSManagedObjectContext *)managedObjectContextForTesting;
++ (NSManagedObjectContext *)backgroundObjectContextForTesting;
+
+
 @end
