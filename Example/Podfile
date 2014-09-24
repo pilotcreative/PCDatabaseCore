@@ -6,5 +6,6 @@ target "PCDatabaseCoreExampleApp" do
 end
 
 target "PCDatabaseCoreExampleAppTests" do
+
 end
 

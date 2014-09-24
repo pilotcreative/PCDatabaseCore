@@ -1,0 +1,14 @@
+PODS:
+  - PCDatabaseCore (0.0.1)
+
+DEPENDENCIES:
+  - PCDatabaseCore (from `git@github.com:pilotcreative/PCDatabaseCore.git`)
+
+EXTERNAL SOURCES:
+  PCDatabaseCore:
+    :git: git@github.com:pilotcreative/PCDatabaseCore.git
+
+SPEC CHECKSUMS:
+  PCDatabaseCore: 46b802b71b4d93b5bdd409c84adfb7a739a6f521
+
+COCOAPODS: 0.33.1

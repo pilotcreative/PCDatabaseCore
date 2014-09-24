@@ -2,7 +2,7 @@
 //  AppDelegate.h
 //  PCDatabaseCoreExampleApp
 //
-//  Created by Paweł Nużka on 05/09/14.
+//  Created by Paweł Nużka on 24/09/14.
 //  Copyright (c) 2014 Pilot. All rights reserved.
 //
 
@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+
 @end
+
