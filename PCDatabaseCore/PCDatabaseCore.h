@@ -32,7 +32,6 @@ extern const int kSaveBatchSize;
 
 + (instancetype)initWithName:(NSString *)databaseName;
 + (instancetype)sharedInstance;
-+ (instancetype)sharedInstanceTest;
 
 #pragma mark - Getters & Setters
 - (NSString *)databasePath;

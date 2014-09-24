@@ -21,6 +21,9 @@ const int kSaveBatchSize = 1000;
 static NSString *kDatabaseName = @"DatabaseName";
 static NSString *kDatabaseType = @"sqlite";
 
+static id dbSharedInstance;
+static dispatch_once_t onceToken;
+
 @implementation PCDatabaseCore
 @synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext, persistentStoreCoordinator;
 
@@ -28,12 +31,6 @@ static NSString *kDatabaseType = @"sqlite";
 #pragma mark Initialization
 + (instancetype)sharedInstance
 {
-    
-#ifdef TEST
-    return [self sharedInstanceTest];
-#endif
-    static dispatch_once_t onceToken;
-    static id dbSharedInstance;
     dispatch_once(&onceToken, ^{
         dbSharedInstance = [[[self class] alloc] init];
         [dbSharedInstance setDatabaseName:kDatabaseName];
@@ -44,38 +41,11 @@ static NSString *kDatabaseType = @"sqlite";
 
 + (instancetype)initWithName:(NSString *)databaseName
 {
-#ifdef TEST
-    return [self sharedInstanceTest];
-#endif
-    static dispatch_once_t onceToken;
-    static id dbSharedInstance;
     dispatch_once(&onceToken, ^{
         dbSharedInstance = [[[self class] alloc] init];
         [dbSharedInstance setDatabaseName:databaseName];
-        [dbSharedInstance mainObjectContext];
     });
     return dbSharedInstance;
-}
-
-
-+ (instancetype)sharedInstanceTest
-{
-    static dispatch_once_t onceToken;
-    static id dbSharedTestInstance;
-    dispatch_once(&onceToken, ^{
-        kDatabaseName = @"XCTests";
-        dbSharedTestInstance = [[[self class] alloc] init];
-    });
-    return dbSharedTestInstance;
-}
-
-- (void)prepareForTests
-{
-    NSArray *bundles = [NSArray arrayWithObject:[NSBundle bundleForClass:[self class]]];
-    NSManagedObjectModel *mom = [NSManagedObjectModel mergedModelFromBundles:bundles];
-    
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    self.persistentStoreCoordinator = psc;
 }
 
 - (id)init

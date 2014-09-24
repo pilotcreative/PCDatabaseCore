@@ -33,8 +33,8 @@ NSString *kEntityName = @"TestEntity";
 {
     [super setUp];
     [DatabaseTestHelperMethods setUpContextsForTesting];
-    self.testContext = [DatabaseTestHelperMethods managedObjectContextForTesting];
-    self.sharedInstance = [PCDatabaseCore sharedInstanceTest];
+    self.sharedInstance = [PCDatabaseCore initWithName:@"XCTests"];
+    self.testContext = [self.sharedInstance mainObjectContext];
 }
 
 - (void)tearDown
@@ -46,12 +46,12 @@ NSString *kEntityName = @"TestEntity";
 
 - (void)testSharedInstance
 {
-    PCDatabaseCore *sharedInstance = [PCDatabaseCore sharedInstanceTest];
+    PCDatabaseCore *sharedInstance = [PCDatabaseCore sharedInstance];
     XCTAssertNotNil(sharedInstance, @"sharedInstance should not be nil");
 }
 
 - (void)testCreateEntity {
-    NSManagedObject *event = [[PCDatabaseCore sharedInstanceTest] createEntity:kEntityName inContext:self.testContext];
+    NSManagedObject *event = [[PCDatabaseCore sharedInstance] createEntity:kEntityName inContext:self.testContext];
     XCTAssertNotNil(event, @"createEntity returns an entity");
 }
 
@@ -112,7 +112,7 @@ NSString *kEntityName = @"TestEntity";
     for (int i = 0; i < kEntityCount; i++) {
         [dbIds addObject:@(i)];
     }
-    NSManagedObjectContext *context = [DatabaseTestHelperMethods backgroundObjectContextForTesting];
+    NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
     __block int counter = 0;
     int allThreads = 4;
     
@@ -165,7 +165,7 @@ NSString *kEntityName = @"TestEntity";
 - (void)testCreateDuplicatesInParallel
 {
     
-    NSManagedObjectContext *context = [DatabaseTestHelperMethods backgroundObjectContextForTesting];
+    NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
     __block int counter = 0;
     int allThreads = 64;
     
@@ -222,7 +222,7 @@ NSString *kEntityName = @"TestEntity";
 }
 - (void)testCreatePartialyDuplicates
 {
-    NSManagedObjectContext *context = [DatabaseTestHelperMethods backgroundObjectContextForTesting];
+    NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
     int allThreads = 5;
     
     NSArray *dbIds = [DatabaseTestHelperMethods prepareDbIdArrayWithStartingIndex:0 endIndex:kEntityCount + 0];

@@ -27,7 +27,7 @@
 }
 
 
-+ (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForModel:(NSManagedObjectModel *)managedObjectModel withStorePath:(NSString *)path
++ (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     static NSPersistentStoreCoordinator *_persistentStoreCoordinator = nil;
     if (_persistentStoreCoordinator != nil)
@@ -35,8 +35,14 @@
         return _persistentStoreCoordinator;
     }
     
-    NSString *testDatabaseName = [[PCDatabaseCore sharedInstanceTest] databaseName];
-    NSString *storePath = [[path stringByDeletingLastPathComponent] stringByAppendingPathComponent:testDatabaseName];
+    NSBundle *mainBundle = [NSBundle bundleForClass: [self class]];
+    NSURL *modelURL = [mainBundle URLForResource:@"TestDataModel" withExtension:@"momd"];
+    
+    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    
+    NSString *testDatabaseName = [[PCDatabaseCore sharedInstance] databaseName];
+    NSString *storePath = [[modelURL.path stringByDeletingLastPathComponent] stringByAppendingPathComponent:testDatabaseName];
     
     NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
     [storeUrl setResourceValue:@(NO) forKey:@"NSURLIsExcludedFromBackupKey" error:nil];
@@ -52,56 +58,17 @@
     return _persistentStoreCoordinator;
 }
 
-+ (NSManagedObjectContext *)managedObjectContextForTesting
-{
-    static NSManagedObjectContext *_managedObjectContextForTesting = nil;
-    if (_managedObjectContextForTesting != nil)
-        return _managedObjectContextForTesting;
-    _managedObjectContextForTesting = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContextForTesting setParentContext:[self writerContextForTesting]];
-    [_managedObjectContextForTesting setUndoManager:nil];
-    
-    return _managedObjectContextForTesting;
-}
-
-+ (NSManagedObjectContext *)writerContextForTesting
-{
-    static NSManagedObjectContext *_writerManagedObjectContext = nil;
-    if (_writerManagedObjectContext == nil) {
-        
-        NSBundle *mainBundle = [NSBundle bundleForClass: [self class]];
-        NSURL *modelURL = [mainBundle URLForResource:@"TestDataModel" withExtension:@"momd"];
-        
-        NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-        
-        _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [_writerManagedObjectContext setPersistentStoreCoordinator:[self persistentStoreCoordinatorForModel:managedObjectModel withStorePath:modelURL.path]];
-    }
-    
-    return _writerManagedObjectContext;
-}
-
-+ (NSManagedObjectContext *)backgroundObjectContextForTesting
-{
-    static NSManagedObjectContext *_backgroundManagedObjectContext = nil;
-    if (_backgroundManagedObjectContext != nil)
-        return _backgroundManagedObjectContext;
-    
-    _backgroundManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [_backgroundManagedObjectContext setParentContext:[self managedObjectContextForTesting]];
-    [_backgroundManagedObjectContext setUndoManager:nil];
-    return _backgroundManagedObjectContext;
-
-}
-
-
 + (void)setUpContextsForTesting
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method orig = class_getInstanceMethod([PCDatabaseCore class], @selector(mainObjectContext));
-        Method new = class_getInstanceMethod([self class], @selector(managedObjectContextForTesting));
+        
+        Class PCDatabaseClass = [PCDatabaseCore class];
+        Class DatabaseHelperTestsClass = [self class];
+        Method orig = class_getInstanceMethod(PCDatabaseClass, @selector(persistentStoreCoordinator));
+        Method new = class_getClassMethod(DatabaseHelperTestsClass, @selector(persistentStoreCoordinator));
         method_exchangeImplementations(orig, new);
+        
     });
 }
 

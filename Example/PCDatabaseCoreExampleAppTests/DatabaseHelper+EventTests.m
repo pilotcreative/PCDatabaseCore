@@ -19,10 +19,8 @@
 - (void)setUp
 {
     [super setUp];
-    self.databaseHelper = [DatabaseHelper sharedInstanceTest];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.databaseHelper = [DatabaseHelper initWithName:@"XCTests"];
 }
-
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.

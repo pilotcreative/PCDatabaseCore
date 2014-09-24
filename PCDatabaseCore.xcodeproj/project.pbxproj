@@ -209,6 +209,7 @@
 		5045A59619B61FAB00ED99BB /* PCDatabaseCore */ = {
 			isa = PBXGroup;
 			children = (
+				50DBEDAA19D2E738007CB315 /* Tests */,
 				5045A5D919B6EED700ED99BB /* Categories */,
 				5045A59919B61FAB00ED99BB /* PCDatabaseCore.h */,
 				5045A59B19B61FAB00ED99BB /* PCDatabaseCore.m */,
@@ -271,6 +272,13 @@
 				5045A5E119B6EED700ED99BB /* UIApplication+Directories.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		50DBEDAA19D2E738007CB315 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

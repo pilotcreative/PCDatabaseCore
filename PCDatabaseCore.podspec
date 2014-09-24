@@ -12,8 +12,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = 'PCDatabaseCore', 'PCDatabaseCore/**/*.{h,m}'
   s.public_header_files = "PCDatabaseCore/**/*.h"
-  #s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   s.framework    = 'CoreData'
   s.requires_arc = true
-   s.dependency 'XCAsyncTestCase'
 end
