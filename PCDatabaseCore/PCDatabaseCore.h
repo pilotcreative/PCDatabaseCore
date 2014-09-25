@@ -15,17 +15,17 @@ typedef void (^ErrorHandleBlock)(NSError *error);
  *  Singleton class to manage CoreData database
  *  It eases use of concurrency and is thread-safe.
  */
-extern const int kFetchBatchSize;
-extern const int kSaveBatchSize;
-
+extern const int kPCDatabaseCoreFetchBatchSize;
+extern const int kPCDatabaseCoreSaveBatchSize;
 
 @interface PCDatabaseCore : NSObject
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *writerObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *backgroundObjectContext;
-
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, assign) int fetchBatchSize;
+@property (nonatomic, assign) int saveBatchSize;
 
 //*********************************************************************************************************
 #pragma mark - Initialization

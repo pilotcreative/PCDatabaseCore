@@ -29,7 +29,7 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = entity;
-    request.fetchBatchSize = kFetchBatchSize;
+    request.fetchBatchSize = self.fetchBatchSize;
     if (predicate != nil)
         request.predicate = predicate;
     [request setIncludesSubentities:NO];
@@ -51,7 +51,7 @@
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setSortDescriptors:sortDescriptors];
         request.entity = entity;
-        request.fetchBatchSize = kFetchBatchSize;
+        request.fetchBatchSize = self.fetchBatchSize;
         [request setIncludesSubentities:NO];
         
         if(predicate != nil)
@@ -77,7 +77,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setSortDescriptors:sortDescriptors];
     request.entity = entity;
-    request.fetchBatchSize = kFetchBatchSize;
+    request.fetchBatchSize = self.fetchBatchSize;
     [request setIncludesSubentities:NO];
     
     
@@ -102,7 +102,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setSortDescriptors:sortDescriptors];
     request.entity = entity;
-    request.fetchBatchSize = kFetchBatchSize;
+    request.fetchBatchSize = self.fetchBatchSize;
     [request setIncludesSubentities:NO];
     [request setResultType:NSDictionaryResultType];
     [request setPropertiesToFetch:properties];
@@ -158,7 +158,7 @@
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setSortDescriptors:sortDescriptors];
         request.entity = entity;
-        request.fetchBatchSize = kFetchBatchSize;
+        request.fetchBatchSize = self.fetchBatchSize;
         [request setIncludesSubentities:NO];
         
         if(predicate != nil)
@@ -188,7 +188,7 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = entity;
-    request.fetchBatchSize = kFetchBatchSize;
+    request.fetchBatchSize = self.fetchBatchSize;
     [request setIncludesSubentities:NO];
     
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:[NSString stringWithFormat:@"%@.%@", relation, key]];

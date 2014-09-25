@@ -15,8 +15,8 @@
 @property (nonatomic, strong) NSString *databaseName;
 @end
 
-const int kFetchBatchSize = 10;
-const int kSaveBatchSize = 1000;
+const int kPCDatabaseCoreFetchBatchSize = 10;
+const int kPCDatabaseCoreSaveBatchSize = 1000;
 
 static NSString *kDatabaseName = @"DatabaseName";
 static NSString *kDatabaseType = @"sqlite";
@@ -25,7 +25,7 @@ static id dbSharedInstance;
 static dispatch_once_t onceToken;
 
 @implementation PCDatabaseCore
-@synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext, persistentStoreCoordinator;
+@synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext, persistentStoreCoordinator, fetchBatchSize, saveBatchSize;
 
 //////////////////////////////////////////////////////
 #pragma mark Initialization
@@ -54,6 +54,8 @@ static dispatch_once_t onceToken;
     if (self) {
         NSString *queueName = [NSString stringWithFormat:@"%@.%@.Database",[[NSBundle mainBundle] bundleIdentifier], kDatabaseName];
         self.taskQ = dispatch_queue_create([queueName cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
+        self.fetchBatchSize = kPCDatabaseCoreFetchBatchSize;
+        self.saveBatchSize = kPCDatabaseCoreSaveBatchSize;
     }
     return self;
 }

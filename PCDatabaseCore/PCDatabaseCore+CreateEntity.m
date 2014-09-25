@@ -169,10 +169,11 @@
     pthread_mutex_unlock(&mutex);
     return [resultingEntities sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
 }
+
 - (NSError *)saveContext:(NSManagedObjectContext *)context forIndex:(NSInteger)idx
 {
     NSError *error = nil;
-    if (idx > 0 && idx % kSaveBatchSize == 0)
+    if (idx > 0 && idx % self.saveBatchSize == 0)
         [context save:&error];
     return error;
 }

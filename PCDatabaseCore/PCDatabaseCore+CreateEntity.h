@@ -56,7 +56,7 @@
 
 /*!
  *  All following functions save objects being returned
- *  Please see kSaveBatchSize
+ *  Please see kPCDatabaseCoreSaveBatchSize
  */
 - (NSArray *)createEntities:(NSString *)entityName
                     withKey:(NSString *)key
