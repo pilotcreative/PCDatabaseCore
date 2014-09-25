@@ -73,10 +73,17 @@ static dispatch_once_t onceToken;
     _databaseName = [NSString stringWithFormat:@"%@.%@", kPCDatabaseCoreName, kPCDatabaseCoreType];
     return _databaseName;
 }
+
 - (void)setDatabaseName:(NSString *)databaseName
 {
     _databaseName = [NSString stringWithFormat:@"%@.%@", databaseName, kPCDatabaseCoreType];
 }
+
+- (NSString *)databasePath
+{
+    return [[[UIApplication sharedApplication]  applicationDocumentsDirectory] stringByAppendingPathComponent:self.databaseName];
+}
+
 
 - (NSManagedObjectContext *)mainObjectContext
 {
@@ -137,12 +144,6 @@ static dispatch_once_t onceToken;
         persistentStoreCoordinator = _persistentStoreCoordinator;
 }
 
-- (NSString *)applicationDocumentsDirectory
-{
-    NSString *libraryDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
-    return [NSString stringWithFormat:@"%@/Caches", libraryDirectory];
-}
-
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (persistentStoreCoordinator != nil)
@@ -152,8 +153,7 @@ static dispatch_once_t onceToken;
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSString *storePath = [[self applicationDocumentsDirectory]
-                           stringByAppendingPathComponent: [self databaseName]];
+    NSString *storePath = [self databasePath];
     NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
     [storeUrl setResourceValue:@(NO) forKey:@"NSURLIsExcludedFromBackupKey" error:nil];
     
