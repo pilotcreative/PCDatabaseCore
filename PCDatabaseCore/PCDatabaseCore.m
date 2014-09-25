@@ -11,6 +11,9 @@
 #import "UIApplication+Directories.h"
 
 @interface PCDatabaseCore ()
+{
+    NSString *_databaseName;
+}
 @property (nonatomic, strong) dispatch_queue_t taskQ;
 @property (nonatomic, strong) NSString *databaseName;
 @end
@@ -18,14 +21,15 @@
 const int kPCDatabaseCoreFetchBatchSize = 10;
 const int kPCDatabaseCoreSaveBatchSize = 1000;
 
-static NSString *kDatabaseName = @"DatabaseName";
-static NSString *kDatabaseType = @"sqlite";
+static NSString *kPCDatabaseCoreName = @"DatabaseName";
+static NSString *kPCDatabaseCoreType = @"sqlite";
 
 static id dbSharedInstance;
 static dispatch_once_t onceToken;
 
 @implementation PCDatabaseCore
-@synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext, persistentStoreCoordinator, fetchBatchSize, saveBatchSize;
+@synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext,
+            persistentStoreCoordinator, fetchBatchSize, saveBatchSize, databaseName=_databaseName;
 
 //////////////////////////////////////////////////////
 #pragma mark Initialization
@@ -33,7 +37,7 @@ static dispatch_once_t onceToken;
 {
     dispatch_once(&onceToken, ^{
         dbSharedInstance = [[[self class] alloc] init];
-        [dbSharedInstance setDatabaseName:kDatabaseName];
+        [dbSharedInstance setDatabaseName:kPCDatabaseCoreName];
         [dbSharedInstance mainObjectContext];
     });
     return dbSharedInstance;
@@ -52,7 +56,7 @@ static dispatch_once_t onceToken;
 {
     self = [super init];
     if (self) {
-        NSString *queueName = [NSString stringWithFormat:@"%@.%@.Database",[[NSBundle mainBundle] bundleIdentifier], kDatabaseName];
+        NSString *queueName = [NSString stringWithFormat:@"%@.%@.Database",[[NSBundle mainBundle] bundleIdentifier], kPCDatabaseCoreName];
         self.taskQ = dispatch_queue_create([queueName cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
         self.fetchBatchSize = kPCDatabaseCoreFetchBatchSize;
         self.saveBatchSize = kPCDatabaseCoreSaveBatchSize;
@@ -66,14 +70,14 @@ static dispatch_once_t onceToken;
     if (_databaseName != nil)
         return _databaseName;
     
-    _databaseName = [NSString stringWithFormat:@"%@.%@", kDatabaseName, kDatabaseType];
+    _databaseName = [NSString stringWithFormat:@"%@.%@", kPCDatabaseCoreName, kPCDatabaseCoreType];
     return _databaseName;
 }
-
-- (NSString *)databasePath
+- (void)setDatabaseName:(NSString *)databaseName
 {
-    return [[[UIApplication sharedApplication]  applicationDocumentsDirectory] stringByAppendingPathComponent:self.databaseName];
+    _databaseName = [NSString stringWithFormat:@"%@.%@", databaseName, kPCDatabaseCoreType];
 }
+
 - (NSManagedObjectContext *)mainObjectContext
 {
     if (mainObjectContext != nil)
@@ -156,7 +160,7 @@ static dispatch_once_t onceToken;
     if (![fileManager fileExistsAtPath:storePath]) {
         // Put down default database if one doesn't already exist
         NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:self.databaseName
-                                                                     ofType:kDatabaseType];
+                                                                     ofType:kPCDatabaseCoreType];
         if (defaultStorePath) {
             [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
         }
