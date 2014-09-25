@@ -17,6 +17,7 @@ typedef void (^ErrorHandleBlock)(NSError *error);
  */
 extern const int kPCDatabaseCoreFetchBatchSize;
 extern const int kPCDatabaseCoreSaveBatchSize;
+extern  NSString const *kPCDatabaseCoreTypeSqlite;
 
 @interface PCDatabaseCore : NSObject
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
@@ -35,7 +36,6 @@ extern const int kPCDatabaseCoreSaveBatchSize;
 
 #pragma mark - Getters & Setters
 - (NSString *)databasePath;
-- (NSString *)applicationDocumentsDirectory;
 - (NSError *)saveDatabase;
 - (NSArray *)objectsFromBackgroundThread:(NSArray *)objects;
 - (id)objectFromBackgroundThread:(NSManagedObject *)object;

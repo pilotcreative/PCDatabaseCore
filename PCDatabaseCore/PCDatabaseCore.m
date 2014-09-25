@@ -22,7 +22,7 @@ const int kPCDatabaseCoreFetchBatchSize = 10;
 const int kPCDatabaseCoreSaveBatchSize = 1000;
 
 static NSString *kPCDatabaseCoreName = @"DatabaseName";
-static NSString *kPCDatabaseCoreType = @"sqlite";
+NSString const *kPCDatabaseCoreTypeSqlite = @"sqlite";
 
 static id dbSharedInstance;
 static dispatch_once_t onceToken;
@@ -70,13 +70,13 @@ static dispatch_once_t onceToken;
     if (_databaseName != nil)
         return _databaseName;
     
-    _databaseName = [NSString stringWithFormat:@"%@.%@", kPCDatabaseCoreName, kPCDatabaseCoreType];
+    _databaseName = [NSString stringWithFormat:@"%@.%@", kPCDatabaseCoreName, kPCDatabaseCoreTypeSqlite];
     return _databaseName;
 }
 
 - (void)setDatabaseName:(NSString *)databaseName
 {
-    _databaseName = [NSString stringWithFormat:@"%@.%@", databaseName, kPCDatabaseCoreType];
+    _databaseName = [NSString stringWithFormat:@"%@.%@", databaseName, kPCDatabaseCoreTypeSqlite];
 }
 
 - (NSString *)databasePath
@@ -160,7 +160,7 @@ static dispatch_once_t onceToken;
     if (![fileManager fileExistsAtPath:storePath]) {
         // Put down default database if one doesn't already exist
         NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:self.databaseName
-                                                                     ofType:kPCDatabaseCoreType];
+                                                                     ofType:kPCDatabaseCoreTypeSqlite];
         if (defaultStorePath) {
             [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
         }
