@@ -45,6 +45,19 @@
                                      withPredicate:(NSPredicate *)predicate
                                   withSortingByKey:(NSString *)key;
 
+- (NSFetchRequest *)fetchedManagedObjectsForEntity:(NSString *)entityName
+                                     withPredicate:(NSPredicate *)predicate
+                                  withSortingByKey:(NSString *)key
+                                          selector:(SEL)selector
+                                         ascending:(BOOL)asc;
+
+- (NSFetchRequest *)fetchedManagedObjectsInContext:(NSManagedObjectContext *)context
+                                         forEntity:(NSString *)entityName
+                                     withPredicate:(NSPredicate *)predicate
+                                  withSortingByKey:(NSString *)key
+                                          selector:(SEL)selector
+                                         ascending:(BOOL)asc;
+
 
 #pragma mark - Fetching
 - (NSArray *)fetchedManagedObjectsInContext:(NSManagedObjectContext *)context

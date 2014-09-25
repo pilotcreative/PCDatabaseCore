@@ -121,6 +121,55 @@
     return [self fetchedManagedObjectsInContext:context forEntity:entityName withPredicate:predicate withSortingByKey:key ascending:YES];
 }
 
+- (NSFetchRequest *)fetchedManagedObjectsForEntity:(NSString *)entityName
+                                     withPredicate:(NSPredicate *)predicate
+                                  withSortingByKey:(NSString *)key
+                                          selector:(SEL)selector
+                                         ascending:(BOOL)asc
+{
+    return [self fetchedManagedObjectsInContext:self.mainObjectContext
+                                      forEntity:entityName
+                                  withPredicate:predicate
+                               withSortingByKey:key
+                                       selector:selector
+                                      ascending:asc];
+}
+
+- (NSFetchRequest *)fetchedManagedObjectsInContext:(NSManagedObjectContext *)context
+                                         forEntity:(NSString *)entityName
+                                     withPredicate:(NSPredicate *)predicate
+                                  withSortingByKey:(NSString *)key
+                                          selector:(SEL)selector
+                                         ascending:(BOOL)asc
+{
+    @synchronized(self)
+    {
+        if (!entityName)
+            return nil;
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+        NSSortDescriptor *sortDescriptor;
+        if(selector){
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:asc selector:selector];
+        }else{
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:asc];
+        }
+        NSArray *sortDescriptors = @[sortDescriptor];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setSortDescriptors:sortDescriptors];
+        request.entity = entity;
+        request.fetchBatchSize = kFetchBatchSize;
+        [request setIncludesSubentities:NO];
+        
+        if(predicate != nil)
+            [request setPredicate:predicate];
+        
+        return request;
+    }
+}
+
+
+
 
 - (NSArray *)fetchedManagedObjectsInContext:(NSManagedObjectContext *)context
                                   forEntity:(NSString *)entityName
