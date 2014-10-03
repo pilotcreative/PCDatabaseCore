@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 #import "DatabaseHelper.h"
-#import "DatabaseHelper+Event.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -22,7 +21,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [DatabaseHelper initWithName:@"PCDatabaseCoreExampleApp"];
-    [[DatabaseHelper sharedInstance] removeAllDataFromDatabase];
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;

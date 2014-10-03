@@ -89,15 +89,5 @@ NSString *const kEventEntityName = @"Event";
     [self removeEntity:kEventEntityName matchingPredicate:predicate inBackground:success failure:failure];
 }
 
-- (NSError *)removeAllDataFromDatabase
-{
-    NSError *__block error = nil;
-    NSDictionary *allEntities = self.managedObjectModel.entitiesByName;
-    [allEntities enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        error = [self removeAllEntities:key];
-    }];
-    
-    return error;
-}
 
 @end

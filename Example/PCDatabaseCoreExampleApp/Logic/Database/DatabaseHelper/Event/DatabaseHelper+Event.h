@@ -38,6 +38,4 @@ extern NSString *const kEventEntityName;
              inBackground:(void (^)())success
                   failure:(ErrorHandleBlock)failure;
 
-- (NSError *)removeAllDataFromDatabase;
-
 @end
