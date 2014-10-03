@@ -27,4 +27,5 @@
              inBackground:(void (^)())success
                   failure:(ErrorHandleBlock)failure;
 
+- (NSError *)removeAllDataFromDatabase;
 @end

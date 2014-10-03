@@ -33,6 +33,8 @@ extern  NSString const *kPCDatabaseCoreTypeSqlite;
 
 + (instancetype)initWithName:(NSString *)databaseName;
 + (instancetype)sharedInstance;
++ (instancetype)sharedInstanceForTests;
+
 
 #pragma mark - Getters & Setters
 - (NSString *)databasePath;

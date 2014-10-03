@@ -163,6 +163,18 @@
 }
 
 
+- (NSError *)removeAllDataFromDatabase
+{
+    NSError *__block error = nil;
+    NSDictionary *allEntities = self.persistentStoreCoordinator.managedObjectModel.entitiesByName;
+    [allEntities enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSLog(@"key");
+        error = [self removeAllEntities:key];
+    }];
+    
+    return error;
+}
+
 
 
 @end

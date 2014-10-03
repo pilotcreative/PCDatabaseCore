@@ -33,13 +33,13 @@ NSString *kEntityName = @"TestEntity";
 {
     [super setUp];
     [DatabaseTestHelperMethods setUpContextsForTesting];
-    self.sharedInstance = [PCDatabaseCore initWithName:@"XCTests"];
+    self.sharedInstance = [PCDatabaseCore sharedInstanceForTests];
     self.testContext = [self.sharedInstance mainObjectContext];
 }
 
 - (void)tearDown
 {
-   [self.sharedInstance removeAllEntities:kEntityName inContext:self.testContext];
+   [self.sharedInstance removeAllDataFromDatabase];
     self.sharedInstance = nil;
     [super tearDown];
 }
@@ -242,6 +242,30 @@ NSString *kEntityName = @"TestEntity";
     
     NSInteger entityCounter = [self.sharedInstance getCountOfEntities:kEntityName inContext:self.testContext];
     XCTAssertTrue(entityCounter == kEntityCount + allThreads - 1 , @"should not duplicate events");
+}
+
+- (void)testRemoveAllDataFromDatabase
+{
+    NSArray *dbIds = [DatabaseTestHelperMethods prepareDbIdArrayWithStartingIndex:0 endIndex:kEntityCount];
+
+    NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
+
+    NSError *error = nil;
+    [self.sharedInstance createEntities:kEntityName
+                                withKey:@"dbId"
+                              andValues:dbIds
+                              inContext:context
+                                  error:&error];
+    
+    
+    XCTAssertNil(error, @"create entities should succeed");
+    
+    NSInteger entityCounter = [self.sharedInstance getCountOfEntities:kEntityName inContext:self.testContext];
+    XCTAssertTrue(entityCounter == kEntityCount, @"should not duplicate events");
+    
+    error = [self.sharedInstance removeAllDataFromDatabase];
+    XCTAssertNil(error, @"remove entities should succeed");
+    
 }
 
 

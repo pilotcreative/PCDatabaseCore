@@ -52,6 +52,12 @@ static dispatch_once_t onceToken;
     return dbSharedInstance;
 }
 
++ (instancetype)sharedInstanceForTests
+{
+    return [self initWithName:@"XCTests"];
+}
+
+
 - (id)init
 {
     self = [super init];
