@@ -165,6 +165,9 @@
 
 - (NSError *)removeAllDataFromDatabase
 {
+    [self.mainObjectContext rollback];
+    [self.backgroundObjectContext rollback];
+    [self.writerObjectContext rollback];
     NSError *__block error = nil;
     NSDictionary *allEntities = self.persistentStoreCoordinator.managedObjectModel.entitiesByName;
     [allEntities enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
