@@ -44,6 +44,34 @@ If you would like to change the type of the database to xml or plist, in your su
 In all places of application you can easily access the database by calling:
 
     [PCDatabaseCore sharedInstance]
+
+### SwiftIntegration
+
+Simply use cocoapods and add following lines to Objective-C bridging header:
+
+	#import <PCDatabaseCore.h>
+	#import <PCDatabaseCore_Categories.h>
+   
+To create Swift sublcass create new class:
+
+```Swift
+
+import Foundation
+
+let _sharedDatabaseInstance : PCDatabase = {
+    let result = PCDatabase()
+    result.databaseName = "<#DatabaseName#>"
+    result.mainObjectContext
+    return result
+    }()
+class PCDatabase : PCDatabaseCore {
+    
+    
+    override class func sharedInstance() -> PCDatabase{
+        return _sharedDatabaseInstance
+    }
+}
+```
    
 ### Creating entities
 #### Main thread
