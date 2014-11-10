@@ -15,7 +15,6 @@
     NSString *_databaseName;
 }
 @property (nonatomic, strong) dispatch_queue_t taskQ;
-@property (nonatomic, strong) NSString *databaseName;
 @end
 
 const int kPCDatabaseCoreFetchBatchSize = 10;
@@ -261,8 +260,8 @@ static dispatch_once_t onceToken;
 - (NSError *)saveDatabase
 {
     __block NSError *error = nil;
-    [mainObjectContext performBlockAndWait:^{
-        if ([mainObjectContext save:&error])
+    [self.mainObjectContext performBlockAndWait:^{
+        if ([self.mainObjectContext save:&error])
         {
             [self.writerObjectContext performBlockAndWait:^{
                 [self.writerObjectContext save:&error];
