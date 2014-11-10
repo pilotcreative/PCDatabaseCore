@@ -20,6 +20,8 @@ extern const int kPCDatabaseCoreSaveBatchSize;
 extern  NSString const *kPCDatabaseCoreTypeSqlite;
 
 @interface PCDatabaseCore : NSObject
+
+@property (nonatomic, strong) NSString *databaseName;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSManagedObjectContext *mainObjectContext;
 @property (nonatomic, readonly) NSManagedObjectContext *writerObjectContext;
