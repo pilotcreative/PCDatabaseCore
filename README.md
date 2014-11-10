@@ -45,7 +45,7 @@ In all places of application you can easily access the database by calling:
 
     [PCDatabaseCore sharedInstance]
 
-### SwiftIntegration
+### Swift Integration
 
 Simply use cocoapods and add following lines to Objective-C bridging header:
 
