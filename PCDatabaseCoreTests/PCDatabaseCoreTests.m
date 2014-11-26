@@ -244,6 +244,19 @@ NSString *kEntityName = @"TestEntity";
     XCTAssertTrue(entityCounter == kEntityCount + allThreads - 1 , @"should not duplicate events");
 }
 
+- (void)testCreateUniqueEntities
+{
+    NSArray *uniqueKeys = @[@"name", @"address"];
+    NSArray *values = @[@"name", @"address"];
+    NSManagedObject *event = [self.sharedInstance createEntity:kEntityName withUniqueKeys:uniqueKeys andValues:values];
+    XCTAssertNotNil(event, @"createEntity returns an entity");
+    [[PCDatabaseCore sharedInstance] createEntity:kEntityName withUniqueKeys:uniqueKeys andValues:values];
+    [[PCDatabaseCore sharedInstance] createEntity:kEntityName withUniqueKeys:uniqueKeys andValues:values];
+    
+    NSInteger entityCounter = [self.sharedInstance getCountOfEntities:kEntityName inContext:self.testContext];
+    XCTAssertTrue(entityCounter == 1, @"there should be no duplicated entities");
+}
+
 - (void)testRemoveAllDataFromDatabase
 {
     NSArray *dbIds = [DatabaseTestHelperMethods prepareDbIdArrayWithStartingIndex:0 endIndex:kEntityCount];

@@ -45,6 +45,15 @@
                          withJSON:(NSDictionary *)json
                         inContext:(NSManagedObjectContext *)context;
 
+- (NSManagedObject *)createEntity:(NSString *)entityName
+                   withUniqueKeys:(NSArray *)uniqueKeys
+                        andValues:(NSArray *)values;
+
+- (NSManagedObject *)createEntity:(NSString *)entityName
+                   withUniqueKeys:(NSArray *)uniqueKeys
+                        andValues:(NSArray *)values
+                        inContext:(NSManagedObjectContext *)context;
+
 
 - (void)createEntity:(NSString *)entityName
             withJSON:(NSDictionary *)json

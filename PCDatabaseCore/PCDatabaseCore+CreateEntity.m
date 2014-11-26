@@ -37,8 +37,6 @@
     if ([entityId isKindOfClass:[NSNumber class]])
     {
 //TODO - THINK IT OVER LATER - might couse a serious BUG
-//        static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-//        pthread_mutex_lock(&mutex);
         NSManagedObject *objectFromDb = [self getEntity:entityName withID:entityId inContext:context];
         
         if (!objectFromDb)
@@ -46,7 +44,6 @@
             objectFromDb = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
             [objectFromDb setValue:entityId forKey:@"dbId"];
         }
-//        pthread_mutex_unlock(&mutex);
         return objectFromDb;
     }
         return nil;
@@ -60,8 +57,6 @@
 {
     if ([key isKindOfClass:[NSString class]] && value != nil)
     {
-//        static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-//        pthread_mutex_lock(&mutex);
         NSManagedObject *objectFromDb = [self getEntity:entityName byKey:key andValue:value inContext:context];
         
         if (!objectFromDb)
@@ -69,11 +64,58 @@
             objectFromDb = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
             [objectFromDb setValue:value forKey:key];
         }
-//        pthread_mutex_unlock(&mutex);
         return objectFromDb;
     }
         return nil;
 }
+
+
+- (NSPredicate *)createPredicateForKeys:(NSArray *)keys andValues:(NSArray *)values
+{
+    NSMutableString *predicateString = [NSMutableString string];
+    NSMutableArray *predicateValues = [NSMutableArray arrayWithCapacity:keys.count + values.count];
+    
+    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [predicateString appendString:@"(%K == %@)"];
+        if (idx < keys.count - 1) {
+            [predicateString appendString:@" AND "];
+        }
+        [predicateValues addObject:obj];
+        [predicateValues addObject:values[idx]];
+    }];
+    return [NSPredicate predicateWithFormat:predicateString argumentArray:predicateValues];
+}
+
+- (NSManagedObject *)createEntity:(NSString *)entityName
+                   withUniqueKeys:(NSArray *)uniqueKeys
+                        andValues:(NSArray *)values
+{
+    return [self createEntity:entityName withUniqueKeys:uniqueKeys andValues:values inContext:self.mainObjectContext];
+}
+
+
+- (NSManagedObject *)createEntity:(NSString *)entityName
+                   withUniqueKeys:(NSArray *)uniqueKeys
+                        andValues:(NSArray *)values
+                        inContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *predicate = nil;
+    if (uniqueKeys.count == values.count) {
+        predicate = [self createPredicateForKeys:uniqueKeys andValues:values];
+        NSManagedObject *objectFromDb = [self getEntity:entityName matchingPredicate:predicate inContext:context];
+        if (!objectFromDb)
+        {
+            objectFromDb = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+            [uniqueKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                [objectFromDb setValue:values[idx] forKey:obj];
+            }];
+        }
+        
+        return objectFromDb;
+    }
+    return nil;
+}
+
 
 
 - (NSManagedObject *)createEntity:(NSString *)entityName
