@@ -47,6 +47,7 @@ static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         dbSharedInstance = [[[self class] alloc] init];
         [dbSharedInstance setDatabaseName:databaseName];
+        [dbSharedInstance mainObjectContext];
     });
     return dbSharedInstance;
 }
