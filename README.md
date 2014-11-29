@@ -58,17 +58,16 @@ To create Swift sublcass create new class:
 
 import Foundation
 
-let _sharedDatabaseInstance : PCDatabase = {
-    let result = PCDatabase()
-    result.databaseName = "<#DatabaseName#>"
-    result.mainObjectContext
-    return result
-    }()
 class PCDatabase : PCDatabaseCore {
+	private class var sharedInstance : PCDatabase {
+	        struct Singleton {
+	            static let databaseInstance = PCDatabase.initWithName("<#DatabaseName#>")
+	        }
+	        return Singleton.databaseInstance
+	    }
     
-    
-    override class func sharedInstance() -> PCDatabase{
-        return _sharedDatabaseInstance
+    override public class func sharedInstance() -> PCDatabase{
+        return sharedInstance
     }
 }
 ```
