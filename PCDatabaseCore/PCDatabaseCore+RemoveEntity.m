@@ -1,6 +1,6 @@
 //
 //  PCDatabaseCore+RemoveEntity.m
-//  ShoobsCheckin
+// PCDatabaseCore
 //
 //  Created by Paweł Nużka on 05.03.2014.
 //  Copyright (c) 2014 GoRailsGo. All rights reserved.
@@ -106,14 +106,14 @@
     
 }
 
-- (void)removeEntities:(NSArray *)events
+- (void)removeEntities:(NSArray *)entities
           inBackground:(void (^)())success
                failure:(ErrorHandleBlock)failure
 {
     NSManagedObjectContext *context = [self backgroundObjectContext];
     dispatch_queue_t main = dispatch_get_main_queue();
     [context performBlock:^{
-        for (NSManagedObject *entity in events)
+        for (NSManagedObject *entity in entities)
         {
             NSError *error = nil;
             NSManagedObject *deletedEntity = [context objectWithID:entity.objectID];

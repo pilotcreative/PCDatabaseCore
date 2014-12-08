@@ -1,6 +1,6 @@
 //
 //  PCDatabaseCore+RemoveEntity.h
-//  ShoobsCheckin
+// PCDatabaseCore
 //
 //  Created by Paweł Nużka on 05.03.2014.
 //  Copyright (c) 2014 GoRailsGo. All rights reserved.
@@ -18,7 +18,7 @@
    matchingPredicate:(NSPredicate *)predicate
         inBackground:(void (^)())success
              failure:(ErrorHandleBlock)failure;
-- (void)removeEntities:(NSArray *)events
+- (void)removeEntities:(NSArray *)entities
         inBackground:(void (^)())success
                failure:(ErrorHandleBlock)failure;
 - (NSError *)removeAllEntities:(NSString *)entityName;

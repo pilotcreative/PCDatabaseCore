@@ -1,6 +1,6 @@
 //
 //  PCDatabaseCore+Fetching.h
-//  ShoobsCheckin
+// PCDatabaseCore
 //
 //  Created by Paweł Nużka on 05.03.2014.
 //  Copyright (c) 2014 GoRailsGo. All rights reserved.

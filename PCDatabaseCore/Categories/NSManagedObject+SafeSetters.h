@@ -1,6 +1,6 @@
 //
 //  NSManagedObject+SafeSetters.h
-//  Shoobs
+//  PCDatabaseCore
 //
 //  Created by Paweł Nużka on 03/06/14.
 //  Copyright (c) 2014 GoRailsGo. All rights reserved.

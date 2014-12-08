@@ -1,6 +1,6 @@
 //
 //  NSArray+Permutations.h
-//  Shoobs
+//  PCDatabaseCore
 //
 //  Created by Paweł Nużka on 30/05/14.
 //  Copyright (c) 2014 GoRailsGo. All rights reserved.
