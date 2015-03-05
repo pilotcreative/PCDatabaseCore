@@ -231,3 +231,7 @@ e.g.
 	     [super tearDown];
 	 }
 ```
+
+### Core Data Materials
+
+[NSPredicate Cheatsheet](http://realm.io/news/nspredicate-cheatsheet/)
