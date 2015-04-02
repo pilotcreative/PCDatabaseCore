@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PCDatabaseCore'
-  s.version      = '0.2'
+  s.version      = '0.3'
   s.summary      = 'Objective-C wrapper for Core Data'
   s.description  = 'Highly customizable objective-C wrapper for Core Data'
   s.homepage     = 'https://github.com/pilotcreative/PCDatabaseCore'
