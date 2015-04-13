@@ -27,7 +27,7 @@ static id dbSharedInstance;
 static dispatch_once_t onceToken;
 
 @implementation PCDatabaseCore
-@synthesize mainObjectContext, backgroundObjectContext, managedObjectModel, writerObjectContext,
+@synthesize mainObjectContext, managedObjectModel, writerObjectContext,
             persistentStoreCoordinator, fetchBatchSize, saveBatchSize, databaseName=_databaseName;
 
 //////////////////////////////////////////////////////
@@ -123,10 +123,7 @@ static dispatch_once_t onceToken;
 
 - (NSManagedObjectContext *)backgroundObjectContext
 {
-    if (backgroundObjectContext != nil)
-        return backgroundObjectContext;
-    
-    backgroundObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *backgroundObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [backgroundObjectContext setParentContext:[self mainObjectContext]];
     [backgroundObjectContext setUndoManager:nil];
     return backgroundObjectContext;

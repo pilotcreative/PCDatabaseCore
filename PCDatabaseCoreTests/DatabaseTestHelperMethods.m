@@ -7,6 +7,7 @@
 //
 
 #import "PCDatabaseCore.h"
+#import <XCTest/XCTest.h>
 #import "DatabaseTestHelperMethods.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
@@ -41,7 +42,7 @@
     NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     
     
-    NSString *testDatabaseName = [[PCDatabaseCore sharedInstance] databaseName];
+    NSString *testDatabaseName = @"XCTests.sqlite";
     NSString *storePath = [[modelURL.path stringByDeletingLastPathComponent] stringByAppendingPathComponent:testDatabaseName];
     
     NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
@@ -72,6 +73,16 @@
         
     });
 }
+
++ (NSArray *)expectationsArrayWithCapacity:(NSInteger)capacity description:(NSString *)description testCase:(XCTestCase *)testCase
+{
+    NSMutableArray *expectations = [NSMutableArray arrayWithCapacity:capacity];
+    for (int i = 0; i < capacity; i++) {
+        [expectations addObject:[testCase expectationWithDescription:description]];
+    }
+    return expectations;
+}
+
 
 
 @end

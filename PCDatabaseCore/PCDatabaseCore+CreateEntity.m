@@ -176,18 +176,18 @@
  * we do not save errors because they will apear if there
  * is more than one required property
  */
+
+
+
 - (NSArray *)createEntities:(NSString *)entityName
                     withKey:(NSString *)key
                   andValues:(NSArray *)values
                   inContext:(NSManagedObjectContext *)context
                       error:(NSError **)error
 {
-    static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    
     NSSet *uniqueValues = [NSSet setWithArray:values];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in %@", key, uniqueValues];
     NSFetchRequest *request = [self fetchedManagedObjectsInContext:context forEntity:entityName withPredicate:predicate withSortingByKey:key ascending:YES];
-    pthread_mutex_lock(&mutex);
     NSArray *fetchedEntities = [self fetchArrayWithRequest:request inContext:context error:nil];
     NSMutableArray *uniqueValuesArray = [NSMutableArray arrayWithArray:[uniqueValues.allObjects sortedArrayUsingSelector:@selector(compare:)]];
 
@@ -208,7 +208,6 @@
     }];
     [context save:error];
 
-    pthread_mutex_unlock(&mutex);
     return [resultingEntities sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
 }
 
@@ -220,16 +219,39 @@
     return error;
 }
 
-- (void)createEnitites:(NSString *)entityName
-            withValues:(NSArray *)valuesArray
-                forKey:(id)key
-          inBackground:(void (^)(NSArray *))success
-               failure:(ErrorHandleBlock)failure
+
+- (NSArray *)createEntities:(NSString *)entityName
+                    withKey:(id)key
+                  andValues:(NSArray *)valuesArray
+                      error:(NSError **)error
 {
+    return [self createEntities:entityName
+                 withKey:key
+               andValues:valuesArray
+               inContext:self.mainObjectContext
+                   error:error];
+}
+
+
+
+- (void)createEntities:(NSString *)entityName
+                withKey:(id)key
+              andValues:(NSArray *)valuesArray
+           inBackground:(void (^)(NSArray *))success
+                failure:(ErrorHandleBlock)failure;
+{
+    static NSManagedObjectContext *backgroundContext = nil;
+    if (backgroundContext == nil) {
+        backgroundContext = [self backgroundObjectContext];
+    }
     dispatch_queue_t main = dispatch_get_main_queue();
-    [self.backgroundObjectContext performBlock:^{
+    [backgroundContext performBlock:^{
         NSError *error = nil;
-        NSArray *entities = [self createEntities:entityName withKey:key andValues:valuesArray inContext:self.backgroundObjectContext error:&error];
+        NSArray *entities = [self createEntities:entityName
+                                         withKey:key
+                                       andValues:valuesArray
+                                       inContext:backgroundContext
+                                           error:&error];
         if (error)
         {
             if (failure)

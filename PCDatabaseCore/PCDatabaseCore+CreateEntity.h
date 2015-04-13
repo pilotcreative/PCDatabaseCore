@@ -67,16 +67,16 @@
  *  All following functions save objects being returned
  *  Please see kPCDatabaseCoreSaveBatchSize
  */
+
+// happens on main context - blocks UI
 - (NSArray *)createEntities:(NSString *)entityName
-                    withKey:(NSString *)key
-                  andValues:(NSArray *)values
-                  inContext:(NSManagedObjectContext *)context
+                    withKey:(id)key
+                  andValues:(NSArray *)valuesArray
                       error:(NSError **)error;
 
-
-- (void)createEnitites:(NSString *)entityName
-            withValues:(NSArray *)valuesArray
-                forKey:(id)key
+- (void)createEntities:(NSString *)entityName
+               withKey:(id)key
+             andValues:(NSArray *)valuesArray
           inBackground:(void (^)(NSArray *))success
                failure:(ErrorHandleBlock)failure;
 
