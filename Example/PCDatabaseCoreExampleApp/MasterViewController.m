@@ -44,7 +44,10 @@
 }
 
 - (void)insertNewObject:(id)sender {
-    Event *event = [[DatabaseHelper sharedInstance] createEventWithId:@(self.objects.fetchedObjects.count)];
+    NSNumber *dbId = @([self.objects.fetchedObjects.lastObject dbId].integerValue + 1);
+    if (!dbId) dbId = @0;
+    
+    Event *event = [[DatabaseHelper sharedInstance] createEventWithId:dbId];
     [event setName:[NSString stringWithFormat:@"Event no. %@", event.dbId]];
     [[DatabaseHelper sharedInstance] saveDatabase];
 }

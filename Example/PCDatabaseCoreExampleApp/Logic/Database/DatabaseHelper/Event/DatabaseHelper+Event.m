@@ -15,7 +15,7 @@ NSString *const kEventEntityName = @"Event";
 - (Event *)createEventWithId:(NSNumber *)dbId
 {
     Event *event = (Event *)[self createEntity:kEventEntityName withID:dbId];
-    [self saveDatabase];
+//    [self saveDatabase];
     return event;
 }
 
@@ -23,7 +23,11 @@ NSString *const kEventEntityName = @"Event";
                              success:(void (^)(NSArray *events))success
                              failure:(ErrorHandleBlock)failure;
 {
-    [self createEnitites:kEventEntityName withValues:dbIds forKey:@"dbId" inBackground:success failure:failure];
+    [self createEntities:kEventEntityName
+                 withKey:@"dbId"
+               andValues:dbIds
+            inBackground:success
+                 failure:failure];
 }
 
 #pragma mark - Get
