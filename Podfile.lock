@@ -1,10 +1,1 @@
-PODS:
-  - XCAsyncTestCase (1.0.0)
-
-DEPENDENCIES:
-  - XCAsyncTestCase
-
-SPEC CHECKSUMS:
-  XCAsyncTestCase: 4b6a2a136d3cff7fe0b6135eb82e98446445c0e2
-
-COCOAPODS: 0.33.1
+COCOAPODS: 0.36.3
