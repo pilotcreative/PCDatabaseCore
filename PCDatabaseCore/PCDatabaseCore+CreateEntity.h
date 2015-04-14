@@ -74,10 +74,18 @@
                   andValues:(NSArray *)valuesArray
                       error:(NSError **)error;
 
+// WARNING: USE ONLY IN THREAD, IF NOT, WILL DUPLICATE ENTITIES
+- (NSArray *)createEntities:(NSString *)entityName
+                    withKey:(id)key
+                  inContext:(NSManagedObjectContext *)context
+                  andValues:(NSArray *)valuesArray
+                      error:(NSError **)error;
+
+
 - (void)createEntities:(NSString *)entityName
                withKey:(id)key
              andValues:(NSArray *)valuesArray
-          inBackground:(void (^)(NSArray *))success
+          inBackground:(void (^)(NSArray *entities))success
                failure:(ErrorHandleBlock)failure;
 
 
