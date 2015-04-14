@@ -232,12 +232,26 @@
                    error:error];
 }
 
+- (NSArray *)createEntities:(NSString *)entityName
+                    withKey:(id)key
+                  inContext:(NSManagedObjectContext *)context
+                  andValues:(NSArray *)valuesArray
+                      error:(NSError **)error
+{
+    return [self createEntities:entityName
+                        withKey:key
+                      andValues:valuesArray
+                      inContext:context
+                          error:error];
+}
+
+
 
 
 - (void)createEntities:(NSString *)entityName
                 withKey:(id)key
               andValues:(NSArray *)valuesArray
-           inBackground:(void (^)(NSArray *))success
+           inBackground:(void (^)(NSArray *results))success
                 failure:(ErrorHandleBlock)failure;
 {
     static NSManagedObjectContext *backgroundContext = nil;
