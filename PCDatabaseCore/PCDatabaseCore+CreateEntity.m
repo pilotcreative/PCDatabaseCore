@@ -185,9 +185,14 @@
                   inContext:(NSManagedObjectContext *)context
                       error:(NSError **)error
 {
+    static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
     NSSet *uniqueValues = [NSSet setWithArray:values];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K in %@", key, uniqueValues];
     NSFetchRequest *request = [self fetchedManagedObjectsInContext:context forEntity:entityName withPredicate:predicate withSortingByKey:key ascending:YES];
+
+    pthread_mutex_lock(&mutex);
+
     NSArray *fetchedEntities = [self fetchArrayWithRequest:request inContext:context error:nil];
     NSMutableArray *uniqueValuesArray = [NSMutableArray arrayWithArray:[uniqueValues.allObjects sortedArrayUsingSelector:@selector(compare:)]];
 
@@ -207,6 +212,8 @@
         [resultingEntities addObject:createdObject];
     }];
     [context save:error];
+
+    pthread_mutex_unlock(&mutex);
 
     return [resultingEntities sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
 }
@@ -232,18 +239,6 @@
                    error:error];
 }
 
-- (NSArray *)createEntities:(NSString *)entityName
-                    withKey:(id)key
-                  inContext:(NSManagedObjectContext *)context
-                  andValues:(NSArray *)valuesArray
-                      error:(NSError **)error
-{
-    return [self createEntities:entityName
-                        withKey:key
-                      andValues:valuesArray
-                      inContext:context
-                          error:error];
-}
 
 
 

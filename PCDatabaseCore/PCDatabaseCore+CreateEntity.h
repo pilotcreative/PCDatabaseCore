@@ -76,9 +76,9 @@
 
 // WARNING: USE ONLY IN THREAD, IF NOT, WILL DUPLICATE ENTITIES
 - (NSArray *)createEntities:(NSString *)entityName
-                    withKey:(id)key
+                    withKey:(NSString *)key
+                  andValues:(NSArray *)values
                   inContext:(NSManagedObjectContext *)context
-                  andValues:(NSArray *)valuesArray
                       error:(NSError **)error;
 
 

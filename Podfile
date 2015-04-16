@@ -6,5 +6,6 @@ target "PCDatabaseCore" do
 end
 
 target "PCDatabaseCoreTests" do
+	pod 'XCAsyncTestCase'
 end
 

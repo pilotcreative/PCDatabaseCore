@@ -59,7 +59,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PCDatabaseCoreTests.xcconfig"; path = "Pods/Pods-PCDatabaseCoreTests.xcconfig"; sourceTree = "<group>"; };
 		500A14F619B9A3A20059DE22 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		500A14F819B9A3EC0059DE22 /* NSManagedObject+SafeSetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+SafeSetters.h"; sourceTree = "<group>"; };
 		500A14F919B9A3EC0059DE22 /* NSManagedObject+SafeSetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+SafeSetters.m"; sourceTree = "<group>"; };
@@ -100,6 +99,8 @@
 		5045A5DF19B6EED700ED99BB /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
 		5045A5E019B6EED700ED99BB /* UIApplication+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Directories.h"; sourceTree = "<group>"; };
 		5045A5E119B6EED700ED99BB /* UIApplication+Directories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Directories.m"; sourceTree = "<group>"; };
+		5BECB23E0D4B10E088D8F133 /* Pods-PCDatabaseCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PCDatabaseCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PCDatabaseCoreTests/Pods-PCDatabaseCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AC8EC44B4DE23FD9D605842C /* Pods-PCDatabaseCoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PCDatabaseCoreTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PCDatabaseCoreTests/Pods-PCDatabaseCoreTests.release.xcconfig"; sourceTree = "<group>"; };
 		C88AC2A23FAD4E9C98F74919 /* libPods-PCDatabaseCoreTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PCDatabaseCoreTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -181,7 +182,7 @@
 				5045A5AA19B61FAB00ED99BB /* PCDatabaseCoreTests */,
 				5045A59319B61FAB00ED99BB /* Frameworks */,
 				5045A59219B61FAB00ED99BB /* Products */,
-				33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */,
+				C29AA8AFE339F1ABE0D3D883 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,6 +282,15 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		C29AA8AFE339F1ABE0D3D883 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5BECB23E0D4B10E088D8F133 /* Pods-PCDatabaseCoreTests.debug.xcconfig */,
+				AC8EC44B4DE23FD9D605842C /* Pods-PCDatabaseCoreTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -372,7 +382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-PCDatabaseCoreTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PCDatabaseCoreTests/Pods-PCDatabaseCoreTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E67113FFC6BB484E8BD5E8CB /* Check Pods Manifest.lock */ = {
@@ -539,7 +549,7 @@
 		};
 		5045A5B819B61FAB00ED99BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */;
+			baseConfigurationReference = 5BECB23E0D4B10E088D8F133 /* Pods-PCDatabaseCoreTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -560,7 +570,7 @@
 		};
 		5045A5B919B61FAB00ED99BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33BB74109E9A4C679373962E /* Pods-PCDatabaseCoreTests.xcconfig */;
+			baseConfigurationReference = AC8EC44B4DE23FD9D605842C /* Pods-PCDatabaseCoreTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
