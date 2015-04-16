@@ -16,4 +16,6 @@
                                description:(NSString *)description
                                   testCase:(XCTestCase *)testCase;
 
++ (NSArray *)contextsArrayWithCapacity:(NSInteger)capacity;
+
 @end

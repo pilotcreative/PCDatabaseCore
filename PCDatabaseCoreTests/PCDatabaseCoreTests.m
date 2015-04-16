@@ -113,40 +113,43 @@ NSString *kEntityName = @"TestEntity";
     }
     NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"test create duplicates in background"];
+    
+
+    
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"test create duplicates in background"];
 
     [context performBlock:^{
-        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-                [expectation fulfill];
-        } failure:nil];
+        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context error:nil];
+        [expectation1 fulfill];
     }];
-    expectation = [self expectationWithDescription:@"test create duplicates in background"];
-    
-    [context performBlock:^{
-        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-            [expectation fulfill];
-        } failure:nil];
-    }];
-    expectation = [self expectationWithDescription:@"test create duplicates in background"];
 
-    [context performBlock:^{
-        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-            [expectation fulfill];
-        } failure:nil];
-    }];
-    expectation = [self expectationWithDescription:@"test create duplicates in background"];
+    
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"test create duplicates in background"];
     
     [context performBlock:^{
-        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-            [expectation fulfill];
-        } failure:nil];
+        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context error:nil];
+        [expectation2 fulfill];
     }];
-    expectation = [self expectationWithDescription:@"test create duplicates in background"];
+
+    XCTestExpectation *expectation3 = [self expectationWithDescription:@"test create duplicates in background"];
     
     [context performBlock:^{
-        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-            [expectation fulfill];
-        } failure:nil];
+        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context error:nil];
+        [expectation3 fulfill];
+    }];
+
+    XCTestExpectation *expectation4 = [self expectationWithDescription:@"test create duplicates in background"];
+    
+    [context performBlock:^{
+        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context error:nil];
+        [expectation4 fulfill];
+    }];
+
+    XCTestExpectation *expectation5 = [self expectationWithDescription:@"test create duplicates in background"];
+    
+    [context performBlock:^{
+        [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inContext:context error:nil];
+        [expectation5 fulfill];
     }];
 
     [self waitForExpectationsWithTimeout:kSaveTimeout
@@ -167,7 +170,7 @@ NSString *kEntityName = @"TestEntity";
     
     NSManagedObjectContext *context = [self.sharedInstance backgroundObjectContext];
     int allThreads = 64;
-    
+   
     NSMutableArray *dbIds = [NSMutableArray arrayWithCapacity:kEntityCount];
     NSArray *expectations = [DatabaseTestHelperMethods expectationsArrayWithCapacity:allThreads
                                                                                 description:@"test create duplicates in parallel"
@@ -180,9 +183,12 @@ NSString *kEntityName = @"TestEntity";
         dispatch_apply(allThreads, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(size_t idx) {
             
             [context performBlock:^{
-                [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-                        [expectations[idx] fulfill];
-                } failure:nil];
+                 [self.sharedInstance createEntities:kEntityName
+                                             withKey:@"dbId"
+                                           andValues:dbIds
+                                           inContext:context
+                                               error:nil];
+                [expectations[idx] fulfill];
             }];
         });
     });
@@ -199,21 +205,13 @@ NSString *kEntityName = @"TestEntity";
     XCTAssertTrue(entityCounter == kEntityCount, @"should not duplicate events");
 }
 
-- (NSManagedObjectContext *)backgroundObjectContext
-{
-    static NSManagedObjectContext *context = nil;
-    if (!context) {
-        context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [context setParentContext:self.testContext];
-    }
-    [context setUndoManager:nil];
-    return context;
-}
+
 
 - (void)testCreatePartialyDuplicatesInParallel
 {
     int allThreads = 4;
-    NSArray *contexts = @[[self backgroundObjectContext], [self backgroundObjectContext], [self backgroundObjectContext], [self backgroundObjectContext]];
+    
+    NSArray *contexts = [DatabaseTestHelperMethods contextsArrayWithCapacity:allThreads];
     NSArray *expectations = [DatabaseTestHelperMethods expectationsArrayWithCapacity:allThreads
                                                                          description:@"test create partially duplicates in parallel"
                                                                             testCase:self];
@@ -224,9 +222,12 @@ NSString *kEntityName = @"TestEntity";
         dispatch_apply(allThreads, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(size_t idx) {
             [contexts[idx] performBlock:^{
                 NSArray *dbIds = [DatabaseTestHelperMethods prepareDbIdArrayWithStartingIndex:idx endIndex:kEntityCount + idx];
-                [self.sharedInstance createEntities:kEntityName withKey:@"dbId" andValues:dbIds inBackground:^(NSArray *results) {
-                    [expectations[idx] fulfill];
-                } failure:nil];
+                [self.sharedInstance createEntities:kEntityName
+                                            withKey:@"dbId"
+                                          andValues:dbIds
+                                          inContext:contexts[idx]
+                                              error:nil];
+                [expectations[idx] fulfill];
             }];
         });
     });

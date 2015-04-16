@@ -83,6 +83,15 @@
     return expectations;
 }
 
++ (NSArray *)contextsArrayWithCapacity:(NSInteger)capacity
+{
+    NSMutableArray *contexts = [NSMutableArray arrayWithCapacity:capacity];
+    for (int i = 0; i < capacity; i++) {
+        [contexts addObject:[[PCDatabaseCore sharedInstance] backgroundObjectContext]];
+    }
+    return contexts;
+}
+
 
 
 @end
