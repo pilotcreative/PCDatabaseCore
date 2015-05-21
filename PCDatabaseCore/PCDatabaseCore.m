@@ -186,51 +186,6 @@ static dispatch_once_t onceToken;
     return persistentStoreCoordinator;
 }
 
-#pragma mark - ContextDidSaveNotification
-- (void)contextChanged:(NSNotification *)notification
-{
-    UIApplication* app = [UIApplication sharedApplication];
-    __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-        [app endBackgroundTask:bgTask];
-        bgTask = UIBackgroundTaskInvalid;
-    }];
-    
-    if ([notification object] == [self mainObjectContext]) return;
-    
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:@selector(contextChanged:) withObject:notification waitUntilDone:YES];
-        return;
-    }
-        [[self mainObjectContext] mergeChangesFromContextDidSaveNotification:notification];
-    bgTask = UIBackgroundTaskInvalid;
-    [self fixNSFetchedResultControllerForNotification:notification];
-}
-
-- (void)fixNSFetchedResultControllerForNotification:(NSNotification *)notification
-{
-    [self makeNSFeetchedResultControllersWorksWithObjects:[[notification userInfo] objectForKey:NSUpdatedObjectsKey]];
-    [self makeNSFeetchedResultControllersWorksWithObjects:[[notification userInfo] objectForKey:NSDeletedObjectsKey]];
-    [self makeNSFeetchedResultControllersWorksWithObjects:[[notification userInfo] objectForKey:NSInsertedObjectsKey]];
-    [self makeNSFeetchedResultControllersWorksWithObjects:[[notification userInfo] objectForKey:NSRefreshedObjectsKey]];
-}
-
-/*
- * fix from: http://stackoverflow.com/questions/14018068/nsfetchedresultscontroller-doesnt-call-controllerdidchangecontent-after-update
- */
-- (void)makeNSFeetchedResultControllersWorksWithObjects:(NSArray *)newObjectsInMainContext
-{
-    for(NSManagedObject *object in newObjectsInMainContext) {
-        NSManagedObject *obj = [[self mainObjectContext] existingObjectWithID:[object objectID]
-                                                                        error:nil];
-        
-        @try {
-            [obj willAccessValueForKey:nil];
-        }
-        @catch (NSException *exception) {
-                    }
-    }
-}
-
 #pragma mark - Threads support
 - (void)setStoreInManagedObjectContext:(NSManagedObjectContext *)mcontext
 {
